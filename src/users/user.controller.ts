@@ -5,14 +5,19 @@ import Users from "../models/user.model"
 import { hashPassword } from "../utils/crypto"
 
 export const getAllUser=async()=>{
-    const data=await Users.findAll()
+    const data=await Users.findAll({
+        where:{
+            status:`active`
+        }
+    })
     return data
 }
 
 export const getUserById=async(id:string)=>{
     const data = await Users.findOne({
             where:{
-                id
+                id,
+                status:`active`
             }
         })
     return data
@@ -53,7 +58,8 @@ export const deleteUser=async (id:string) => {
 export const getUserByEmail=async (email:string) => {
     const result=await Users.findOne({
         where:{
-            email
+            email,
+            status:`active`
         }
     })
     return result

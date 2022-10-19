@@ -101,7 +101,7 @@ export const getMyUser=(req:any,res:Response)=>{
 
 export const deleteMyUser=(req:any,res:Response)=>{
     const id=req.user.id
-    userController.deleteUser(id)
+    userController.updateUser(id,{status:`inactive`})
         .then((result)=>{
             res.status(204).json(result)
         })
@@ -112,10 +112,10 @@ export const deleteMyUser=(req:any,res:Response)=>{
 
 export const updateMyUser=(req:any,res:Response)=>{
     const id=req.user.id
-    const data=req.body
-    userController.updateUser(id,data)
-        .then((result)=>{
-            res.status(202).json(result)
+    const {firstName,lastName,phone,birthday,gender,country}=req.body
+    userController.updateUser(id,{firstName,lastName,phone,birthday,gender,country})
+        .then(()=>{
+            res.status(202).json({message:`todo bien c:`})
         })
         .catch((err:Error)=>{
             res.status(404).json({message:err.message})
