@@ -5,19 +5,14 @@ import Users from "../models/user.model"
 import { hashPassword } from "../utils/crypto"
 
 export const getAllUser=async()=>{
-    const data=await Users.findAll({
-        where:{
-            status:`active`
-        }
-    })
+    const data=await Users.findAll()
     return data
 }
 
 export const getUserById=async(id:string)=>{
     const data = await Users.findOne({
             where:{
-                id,
-                status:`active`
+                id
             }
         })
     return data
@@ -29,11 +24,7 @@ export const createUser=async(data:any)=>{
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
-        password: hashPassword(data.password),
-        phone: data.phone,
-        birthday: data.birthday,
-        gender: data.gender,
-        country: data.country
+        password: hashPassword(data.password)
     })
     return newUser
 }
@@ -58,8 +49,7 @@ export const deleteUser=async (id:string) => {
 export const getUserByEmail=async (email:string) => {
     const result=await Users.findOne({
         where:{
-            email,
-            status:`active`
+            email
         }
     })
     return result

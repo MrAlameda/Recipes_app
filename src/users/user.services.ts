@@ -24,10 +24,7 @@ export const userById=(req:Request,res:Response)=>{
 export const userAdd=(req:Request,res:Response)=>{
     const data:UserInfo=req.body
     if(
-           data.phone
-        && data.birthday
-        && data.country
-        && data.email
+        data.email
         && data.firstName
         && data.gender
         && data.lastName
@@ -47,9 +44,7 @@ export const userAdd=(req:Request,res:Response)=>{
                     firstName: 'string',
                     lastName: 'string',
                     email: 'example@example.com',
-                    password: 'string',
-                    phone: '+521231231231',
-                    birthday: 'YYYY/MM/DD'
+                    password: 'string'
                 }
             })
         }
@@ -57,7 +52,7 @@ export const userAdd=(req:Request,res:Response)=>{
 
 export const userPatch=(req:Request,res:Response)=>{
     const id=req.params.id
-    const data:Exclude<UserInfo,"id"|"email"|"birthday"|"password">=req.body
+    const data=req.body
 
     userController.updateUser(id,data)
         .then((data:any)=>{
@@ -112,8 +107,8 @@ export const deleteMyUser=(req:any,res:Response)=>{
 
 export const updateMyUser=(req:any,res:Response)=>{
     const id=req.user.id
-    const {firstName,lastName,phone,birthday,gender,country}=req.body
-    userController.updateUser(id,{firstName,lastName,phone,birthday,gender,country})
+    const {firstName,lastName}=req.body
+    userController.updateUser(id,{firstName,lastName})
         .then(()=>{
             res.status(202).json({message:`todo bien c:`})
         })
