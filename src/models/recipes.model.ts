@@ -1,10 +1,10 @@
-import db from "../utils/database";
+import db from "../utils/db.config";
 import Category from "./Category.model";
-import Users from "./users.models";
+import User from "./user.model";
 
 const { DataTypes } =require("sequelize");
 
-const Recipes = db.define("Recipe", {
+const Recipes = db.define("recipes", {
     id: {
         type: DataTypes.UUID,
         primaryKey: true,
@@ -25,8 +25,7 @@ const Recipes = db.define("Recipe", {
         type:DataTypes.STRING,
         validate:{
             isUrl:true
-        },
-        field:"url_img"
+        }
     },
     time:{
         type:DataTypes.INTEGER,
@@ -41,14 +40,14 @@ const Recipes = db.define("Recipe", {
         allowNull:false,
         references:{
             key:"id",
-            model:Users
+            model:User
         }
     },
     categoryId:{
-        type:DataTypes.UUID,
+        type:DataTypes.INTEGER,
         allowNull:false,
         references:{
-            key:"id",
+            key:'id',
             model:Category
         }        
     },

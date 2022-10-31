@@ -13,6 +13,7 @@ app.use(express.json())
 
 //! database
 import db_seq from "./utils/db.config";
+import initModels from "./models/initModels";
 
 db_seq.authenticate()
     .then(()=>{
@@ -29,6 +30,8 @@ db_seq.sync()
         console.log('================//==================');
     })
     .catch((err:Error)=>console.error(err.message))
+
+initModels()
 
 //! enruter
 app.get("/",(req:Request,res:Response)=>{
