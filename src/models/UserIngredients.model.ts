@@ -17,11 +17,11 @@ const UserIngredients=db.define("user_ingredients",{
     userId: {
         type: DataTypes.UUID,
         allowNull: false,
-        field: 'user_id',
         references: {
             key: 'id',
             model: User
         }
+        
     },
     ingredientId: {
         type: DataTypes.UUID,

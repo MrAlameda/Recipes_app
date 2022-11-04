@@ -88,7 +88,7 @@ export const createRecipe = async (data:any,user_id:string) => {
         userId: user_id,
         categoryId: data.categoryId,
         origin: data.origin,
-        likes: data.likes
+        likes: data.likes ||0
     })
     return response
 }
