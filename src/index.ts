@@ -11,6 +11,8 @@ const app = express()
 import auth_routes  from "./auth/auth.routes";
 import user_routes from "./users/user.routes"
 import category_routes from "./categories/categories.routes"
+import recipes_routes from "./recipes/recipes.routes"
+import ingredients_router from "./ingredients/ingredients.routes"
 
 //! middalwere
 app.use(express.json())
@@ -50,8 +52,8 @@ app.get("/",(req:Request,res:Response)=>{
 app.use('/users', user_routes)
 app.use('/auth', auth_routes)
 app.use('/categories', category_routes)
-// app.use('/recipes', recipe_rutes)
-// app.use('/ingredients', ingredients_router)
+app.use('/recipes', recipes_routes)
+app.use('/ingredients', ingredients_router)
 
 
 //* initServer 

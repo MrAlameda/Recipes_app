@@ -28,7 +28,7 @@ export const getById = (req:Request, res:Response) => {
 }
 
 export const posted = (req:Request, res:Response) => {
-    const { name } = req.body
+    const {name} = req.body
 
     if(name){
         categoryControllers.createCategories(name)
@@ -36,7 +36,7 @@ export const posted = (req:Request, res:Response) => {
                 res.status(201).json(data)
             })
             .catch(err=> {
-                res.status(400).json({message: err.message})
+                res.status(400).json({where:"categoryController",message: err})
             })
     } else {
         res.status(400).json({

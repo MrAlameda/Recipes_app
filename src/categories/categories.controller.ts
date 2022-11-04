@@ -1,5 +1,5 @@
 
-const uuid=require("uuid")
+
 
 import Category from "../models/Category.model" 
 
@@ -17,10 +17,10 @@ export const getCategoriesById=async(id:string)=>{
     return data
 }
 
-export const createCategories=async(data:any)=>{
+export const createCategories=async(name:string)=>{
     const newCategory=await Category.create({
-        id:uuid.v4(),
-        name: data.name,
+        
+        name: name,
     })
     return newCategory
 }

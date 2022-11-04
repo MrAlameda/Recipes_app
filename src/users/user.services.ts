@@ -26,7 +26,6 @@ export const userAdd=(req:Request,res:Response)=>{
     if(
         data.email
         && data.firstName
-        && data.gender
         && data.lastName
         && data.password
         ){

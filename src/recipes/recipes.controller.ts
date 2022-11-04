@@ -1,14 +1,16 @@
 const uuid = require('uuid')
 const {Op} = require('sequelize')
 
-const Recipes = require('../models/recipes.models')
-const Users = require('../models/users.models')
-const Categories = require('../models/categories.models')
-const Instructions = require('../models/instructions.models')
-const RecipeIngredients = require('../models/recipes_ingredients.models')
-const Ingredients = require('../models/ingredients.models')
-const Types = require('../models/types.models')
-const UsersIngredients = require('../models/users_ingredients.models')
+import Recipes from '../models/recipes.model'
+import User from '../models/user.model'
+import Category from '../models/Category.model'
+import Instructions from '../models/instructions.model'
+import IngredientsRecipes from '../models/IngredientsRecipes.model'
+import Ingredients from '../models/Ingredients.model'
+import Types from '../models/Types.model'
+import UserIngredients from '../models/UserIngredients.model'
+
+
 
 export const getAllRecipes = async () => {
     const data = await Recipes.findAll({
@@ -17,10 +19,10 @@ export const getAllRecipes = async () => {
         },
         include: [
             {
-                model: Categories
+                model: Category
             },
             {
-                model: Users,
+                model: User,
                 attributes: ['id', 'firstName', 'lastName']
             },
             {
@@ -28,7 +30,7 @@ export const getAllRecipes = async () => {
                 attributes: ['step', 'description']
             },
             {
-                model: RecipeIngredients,
+                model: IngredientsRecipes,
                 include: {
                     model: Ingredients,
                     include: {
@@ -51,10 +53,10 @@ export const getRecipeById = async (id:string) => {
         },
         include: [
             {
-                model: Categories
+                model: Category
             },
             {
-                model: Users,
+                model: User,
                 attributes: ['id', 'firstName', 'lastName']
             },
             {
@@ -62,7 +64,7 @@ export const getRecipeById = async (id:string) => {
                 attributes: ['step', 'description']
             },
             {
-                model: RecipeIngredients,
+                model: IngredientsRecipes,
                 include: {
                     model: Ingredients,
                     include: {
@@ -110,14 +112,14 @@ export const deleteRecipe = async (id:string) => {
 }
 
 export const getMyRecipes = async(userId:string) => {
-    const userIngredients = await UsersIngredients.findAll({
+    const userIngredients = await UserIngredients.findAll({
         attributes: ['ingredientId'],
         where: {
             userId
         }
     })
     const filteredIngredients = userIngredients.map((obj:any) => obj.ingredientId)
-    const recipeIngredients = await RecipeIngredients.findAll({
+    const recipeIngredients = await IngredientsRecipes.findAll({
         where: {
             ingredientId: {
                 [Op.in]: filteredIngredients

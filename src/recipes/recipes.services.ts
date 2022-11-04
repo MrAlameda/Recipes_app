@@ -11,8 +11,7 @@ export const getAll = (req:Request, res:Response) => {
             res.status(400).json({message: err.message})
         })
 }
-//? /api/v1/recipe/2/ingredients/8
-//? router.get('/api/v1/recipe/:recipe_id/ingredients/:ingredient_id')
+
 export const getById = (req:any, res:Response) => {
     const id = req.params.recipe_id 
     recipeControllers.getRecipeById(id)
@@ -82,6 +81,17 @@ export const deleted = (req:Request, res:Response) => {
             }
         })
         .catch((err:Error)=> {
+            res.status(400).json({message: err.message})
+        })
+}
+
+export const getUserRecipes = (req:any, res:Response) => {
+    const userId = req.user.id
+    recipeControllers.getMyRecipes(userId)
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch( err => {
             res.status(400).json({message: err.message})
         })
 }

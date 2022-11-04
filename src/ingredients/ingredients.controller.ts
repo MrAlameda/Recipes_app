@@ -2,6 +2,7 @@
 const uuid=require("uuid")
 
 import Ingredients from "../models/Ingredients.model" 
+import UserIngredients from "../models/UserIngredients.model"
 
 export const getAllIngredients=async()=>{
     const data=await Ingredients.findAll()
@@ -44,3 +45,12 @@ export const deleteIngredients=async (id:string) => {
     return result
 }
 
+export const addIngredientToUser = async(data:any,userId:string,ingredientId:string) => {
+    const response = await UserIngredients.create({
+        id: uuid.v4(),
+        amount: data.amount,
+        userId: userId,
+        ingredientId: ingredientId
+    })
+    return response
+}

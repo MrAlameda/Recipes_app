@@ -25,3 +25,5 @@ router.route('/:recipe_id')
         passport.authenticate('jwt', {session: false}),
         recipeServices.deleted
     )
+
+export default router
