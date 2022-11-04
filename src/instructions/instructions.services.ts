@@ -50,7 +50,7 @@ export const posted = (req:Request, res:Response) => {
 }
 
 
-export const patchInstruction = (req:Request, res:Response) => {
+export const patched = (req:Request, res:Response) => {
     const { description, step, recipeId } = req.body
     const id = req.params.instruction_id
     instructionControllers.updateInstructions(id, {description, step, recipeId})
@@ -66,7 +66,7 @@ export const patchInstruction = (req:Request, res:Response) => {
         })  
 }
 
-export const deleteInstruction = (req:Request, res:Response) => {
+export const deleted = (req:Request, res:Response) => {
     const id = req.params.instruction_id
 
     instructionControllers.deleteInstructions(id)
