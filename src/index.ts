@@ -2,14 +2,19 @@
 import  express, { Request, Response }  from "express"
 import config from "./config"
 
+const cors =require("cors")
+
 //* init
 const app = express()
+
 //! routes
 import auth_routes  from "./auth/auth.routes";
 import user_routes from "./users/user.routes"
+import category_routes from "./categories/categories.routes"
 
 //! middalwere
 app.use(express.json())
+app.use(cors())
 
 //! database
 import db_seq from "./utils/db.config";
@@ -41,8 +46,13 @@ app.get("/",(req:Request,res:Response)=>{
     })
 })
 // //* routes 
-app.use("/users",user_routes)
-app.use("/auth",auth_routes)
+
+app.use('/users', user_routes)
+app.use('/auth', auth_routes)
+app.use('/categories', category_routes)
+// app.use('/recipes', recipe_rutes)
+// app.use('/ingredients', ingredients_router)
+
 
 //* initServer 
 app.listen(config.port,()=>{

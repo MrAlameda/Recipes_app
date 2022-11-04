@@ -1,6 +1,6 @@
 import db from "../utils/db.config"
 import Ingredients from "./Ingredients.model"
-import Recipes from "./recipes.model"
+import User from "./user.model"
 
 const {DataTypes} = require("sequelize")
 
@@ -10,17 +10,17 @@ const UserIngredients=db.define("user_ingredients",{
         primaryKey: true,
         allowNull: false
     },
-    amount: {
+    amount : {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull:false
     },
-    recipeId: {
+    userId: {
         type: DataTypes.UUID,
         allowNull: false,
-        field: 'recipe_id',
+        field: 'user_id',
         references: {
             key: 'id',
-            model: Recipes
+            model: User
         }
     },
     ingredientId: {
